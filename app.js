@@ -56,7 +56,7 @@ function graph() {
       title: 'otu',
       showlegend: false,
       height: 600,
-      width: 600
+      width: 1000
     };
     Plotly.plot("bubble", trace1, layout);
     //poulate demo_info
