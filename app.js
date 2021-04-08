@@ -1,3 +1,4 @@
+// if subjectID is updated, re-graph for new subjectID
 function optionChanged() {
   graph();
 }
@@ -55,12 +56,14 @@ function graph() {
     var layout = {
       title: 'otu',
       showlegend: false,
-      height: 600,
-      width: 600
+      height: 800,
+      width: 1000,
+      fixedrange: false
     };
     Plotly.plot("bubble", trace1, layout);
     //poulate demo_info
     var demo_info = d3.select("#sample-metadata")
+    //resets panel for new subjectID
     demo_info.html("")
     //generate demographic table
     var metadata = data.metadata;
@@ -69,6 +72,7 @@ function graph() {
     // returning current ID for metadata
     var filteredMeta= data.metadata.filter(entry => entry.id == current_sample);
     console.log(filteredMeta);
+    // prepare demo_info as an object to append
     var demo_data ={
      'age: ' : filteredMeta[0].age,
     'bbtype: ' : filteredMeta[0].bbtype,
@@ -77,12 +81,13 @@ function graph() {
      'ID: ' : filteredMeta[0].id,
      'location: ' : filteredMeta[0].location,
      'wfreq: ': filteredMeta[0].wrfeq}
-
+      //appending demo_data as object to panel
      Object.entries(demo_data).forEach(([key,value]) =>{
        demo_info.append('p').html(key + value)
      });
   })
 }
+//call the function
 graph()
 
 
