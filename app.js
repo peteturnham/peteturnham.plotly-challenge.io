@@ -60,7 +60,7 @@ function graph() {
       width: 1000,
       fixedrange: false
     };
-    Plotly.plot("bubble", trace1, layout);
+    Plotly.newPlot("bubble", trace1, layout);
     //poulate demo_info
     var demo_info = d3.select("#sample-metadata")
     //resets panel for new subjectID
