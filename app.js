@@ -57,8 +57,12 @@ function graph() {
       title: 'otu',
       showlegend: false,
       height: 800,
+<<<<<<< HEAD
       width: 1000,
       fixedrange: false
+=======
+      width: 1000
+>>>>>>> f45be69a8372956bf5c1f19d3802452ea6453a1a
     };
     Plotly.plot("bubble", trace1, layout);
     //poulate demo_info
