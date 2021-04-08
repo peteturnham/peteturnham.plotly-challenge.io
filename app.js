@@ -1,9 +1,5 @@
-// if subjectID is updated, re-graph for new subjectID
-function optionChanged() {
-  graph();
-}
-// function for generating plots
-function graph() {
+//initialize webpage
+function init(){
   var dropdown = d3.select("#selDataset");
   d3.json("samples.json").then((data) => {
     var current_sample = dropdown.node().value;
@@ -20,7 +16,33 @@ function graph() {
         // displays interactive dropdown bar
         .property("value", sample);
     })
-    // returns ID value from original data object
+})
+graph()
+}
+init();
+// if subjectID is updated, re-graph for new subjectID
+function optionChanged() {
+  graph();
+}
+// function for generating plots
+function graph() {
+  var dropdown = d3.select("#selDataset");
+  d3.json("samples.json").then((data) => {
+    var current_sample = dropdown.node().value;
+    var sampleNames = data.names;
+    console.log(data);
+    var samples = data.samples;
+//     //appending id values to dropdown bar
+//     sampleNames.forEach((sample) => {
+//       dropdown
+//         // selects from index.html 
+//         .append("option")
+//         //loads id value
+//         .text(sample)
+//         // displays interactive dropdown bar
+//         .property("value", sample);
+//     })
+//     // returns ID value from original data object
     var current_sample = dropdown.node().value;
     
     // returns an object
