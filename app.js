@@ -55,7 +55,7 @@ function graph() {
     var layout = {
       title: 'otu',
       showlegend: false,
-      height: 600,
+      height: 800,
       width: 1000
     };
     Plotly.plot("bubble", trace1, layout);
