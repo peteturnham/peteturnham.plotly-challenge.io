@@ -32,17 +32,7 @@ function graph() {
     var sampleNames = data.names;
     console.log(data);
     var samples = data.samples;
-//     //appending id values to dropdown bar
-//     sampleNames.forEach((sample) => {
-//       dropdown
-//         // selects from index.html 
-//         .append("option")
-//         //loads id value
-//         .text(sample)
-//         // displays interactive dropdown bar
-//         .property("value", sample);
-//     })
-//     // returns ID value from original data object
+    
     var current_sample = dropdown.node().value;
     
     // returns an object
