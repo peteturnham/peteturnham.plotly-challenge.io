@@ -1,9 +1,5 @@
-// if subjectID is updated, re-graph for new subjectID
-function optionChanged() {
-  graph();
-}
-// function for generating plots
-function graph() {
+//initialize webpage
+function init(){
   var dropdown = d3.select("#selDataset");
   d3.json("samples.json").then((data) => {
     var current_sample = dropdown.node().value;
@@ -20,6 +16,33 @@ function graph() {
         // displays interactive dropdown bar
         .property("value", sample);
     })
+})
+graph()
+}
+init();
+// if subjectID is updated, re-graph for new subjectID
+function optionChanged() {
+  Plotly.restyle
+  graph();
+}
+// function for generating plots
+function graph() {
+  var dropdown = d3.select("#selDataset");
+  d3.json("samples.json").then((data) => {
+    var current_sample = dropdown.node().value;
+    var sampleNames = data.names;
+    console.log(data);
+    var samples = data.samples;
+    //appending id values to dropdown bar
+    // sampleNames.forEach((sample) => {
+    //   dropdown
+    //     // selects from index.html 
+    //     .append("option")
+    //     //loads id value
+    //     .text(sample)
+    //     // displays interactive dropdown bar
+    //     .property("value", sample);
+    // })
     // returns ID value from original data object
     var current_sample = dropdown.node().value;
     
@@ -49,6 +72,7 @@ function graph() {
       text: labels,
       mode: 'markers',
       marker: {
+        colorscale: 'Portland',
         size: sample_values,
         color: otu_ids
       }
@@ -60,7 +84,7 @@ function graph() {
       width: 1000,
       fixedrange: false
     };
-    Plotly.plot("bubble", trace1, layout);
+    Plotly.newPlot("bubble", trace1, layout);
     //poulate demo_info
     var demo_info = d3.select("#sample-metadata")
     //resets panel for new subjectID
@@ -80,14 +104,37 @@ function graph() {
      'gender: ' : filteredMeta[0].gender,
      'ID: ' : filteredMeta[0].id,
      'location: ' : filteredMeta[0].location,
-     'wfreq: ': filteredMeta[0].wrfeq}
+     'wfreq: ': filteredMeta[0].wfreq}
       //appending demo_data as object to panel
      Object.entries(demo_data).forEach(([key,value]) =>{
        demo_info.append('p').html(key + value)
      });
+    // gauge
+    var data = [
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        title: { text: "Washes Per Week" },
+        type: "indicator",
+        mode: "gauge",
+        
+        gauge: {
+          axis: { range: [null,10 ] },
+          steps: [
+            { range: [0, 250], color: "Portland" },
+            { range: [250, 400], color: "gray" }
+          ],
+          threshold: {
+            line: { color: "red", width: 4 },
+            thickness: 0.75,
+            value: filteredMeta[0].wfreq
+          }
+        }
+      }
+    ];
+    var layout = { width: 600, height: 450, margin: { t: 0, b: 0 } };
+  Plotly.newPlot('myDiv', data, layout);
   })
 }
 //call the function
 graph()
-
 
