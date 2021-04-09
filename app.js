@@ -22,7 +22,10 @@ graph()
 init();
 // if subjectID is updated, re-graph for new subjectID
 function optionChanged() {
+<<<<<<< HEAD
   Plotly.restyle
+=======
+>>>>>>> afb13885d40b279dda53a03dac5bef48df8c184a
   graph();
 }
 // function for generating plots
@@ -33,6 +36,7 @@ function graph() {
     var sampleNames = data.names;
     console.log(data);
     var samples = data.samples;
+<<<<<<< HEAD
     //appending id values to dropdown bar
     // sampleNames.forEach((sample) => {
     //   dropdown
@@ -44,6 +48,9 @@ function graph() {
     //     .property("value", sample);
     // })
     // returns ID value from original data object
+=======
+    
+>>>>>>> afb13885d40b279dda53a03dac5bef48df8c184a
     var current_sample = dropdown.node().value;
     
     // returns an object
